@@ -2,7 +2,8 @@ import React, {useEffect, useState} from 'react';
 import { Package, DollarSign, Users, Clock } from 'lucide-react';
 import { Card } from './components/Card';
 import {Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
-import { BrowserRouter as Router, Route, Routes, useParams } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import PaymentPage from "./PaymentPage.tsx";
 
 interface DashboardCardProps {
   title: string;
@@ -145,25 +146,6 @@ const SellerDashboard = () => {
       </div>
   );
 }
-
-const PaymentPage = () => {
-  const { payment_url } = useParams();
-
-  useEffect(() => {
-    if (payment_url) {
-      console.log(`prev ${payment_url}`)
-      const formattedUrl = payment_url
-          .replace(/\*/g, ':')  // Заменяем '*' обратно на ':'
-          .replace(/\+/g, '/')  // Заменяем '+' обратно на '/'
-          .replace(/#/g, '?');  // Заменяем '#' обратно на '?'
-
-      console.log(`new ${formattedUrl}`)
-      window.location.href = formattedUrl;
-    }
-  }, [payment_url]);
-
-  return <div>Redirecting...</div>;
-};
 
 function App() {
   return (
