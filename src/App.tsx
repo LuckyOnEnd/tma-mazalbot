@@ -151,15 +151,14 @@ const PaymentPage = () => {
 
   useEffect(() => {
     if (payment_url) {
-      console.log(payment_url)
+      console.log(`prev ${payment_url}`)
       // Заменяем символы обратно на оригинальные
       const formattedUrl = payment_url
           .replace(/\*/g, ':')  // Заменяем '*' обратно на ':'
           .replace(/\+/g, '/')  // Заменяем '+' обратно на '/'
           .replace(/#/g, '?');  // Заменяем '#' обратно на '?'
 
-      console.log(formattedUrl)
-      // Перенаправляем на нужный URL
+      console.log(`prev ${formattedUrl}`)
       window.location.href = formattedUrl;
     }
   }, [payment_url]);
