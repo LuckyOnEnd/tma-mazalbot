@@ -1,4 +1,3 @@
-// PaymentPage.tsx - Copy this entire file
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -10,17 +9,12 @@ const PaymentPage = () => {
     React.useEffect(() => {
         const handlePayment = async () => {
             try {
-                // Make sure we have a payment URL
                 if (!payment_url) {
                     throw new Error('Missing payment URL');
                 }
 
-                // Clean up the URL
-                const cleanUrl = payment_url
-                    .replace(/\*\*/g, '/')
-                    .replace(/[<>'"]/g, '');
 
-                window.location.href = cleanUrl;
+                window.location.replace(`https://secure.cardcom.solutions/External/lowProfileClearing/1000.aspx?LowProfileCode=${payment_url}`);
             } catch (error) {
                 setStatus('error');
                 console.error('Payment error:', error);
@@ -30,7 +24,6 @@ const PaymentPage = () => {
         handlePayment();
     }, [payment_url]);
 
-    // Show loading spinner
     if (status === 'loading') {
         return (
             <div style={{
@@ -41,28 +34,11 @@ const PaymentPage = () => {
                 flexDirection: 'column',
                 gap: '20px'
             }}>
-                <div style={{
-                    width: '50px',
-                    height: '50px',
-                    border: '5px solid #f3f3f3',
-                    borderTop: '5px solid #3498db',
-                    borderRadius: '50%',
-                    animation: 'spin 1s linear infinite'
-                }} />
-                <style>
-                    {`
-            @keyframes spin {
-              0% { transform: rotate(0deg); }
-              100% { transform: rotate(360deg); }
-            }
-          `}
-                </style>
                 <p>Processing payment...</p>
             </div>
         );
     }
 
-    // Show error message
     if (status === 'error') {
         return (
             <div style={{
