@@ -158,7 +158,7 @@ const PaymentPage = () => {
           .replace(/\+/g, '/')  // Заменяем '+' обратно на '/'
           .replace(/#/g, '?');  // Заменяем '#' обратно на '?'
 
-      console.log(`prev ${formattedUrl}`)
+      console.log(`new ${formattedUrl}`)
       window.location.href = formattedUrl;
     }
   }, [payment_url]);
