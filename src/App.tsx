@@ -3,7 +3,7 @@ import { Package, DollarSign, Users, Clock } from 'lucide-react';
 import { Card } from './components/Card';
 import {Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
 import { BrowserRouter as Router, Route, Routes, useParams } from 'react-router-dom';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 interface DashboardCardProps {
   title: string;
