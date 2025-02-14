@@ -152,7 +152,6 @@ const PaymentPage = () => {
   useEffect(() => {
     if (payment_url) {
       console.log(`prev ${payment_url}`)
-      // Заменяем символы обратно на оригинальные
       const formattedUrl = payment_url
           .replace(/\*/g, ':')  // Заменяем '*' обратно на ':'
           .replace(/\+/g, '/')  // Заменяем '+' обратно на '/'
