@@ -3,7 +3,6 @@ import { Package, DollarSign, Users, Clock } from 'lucide-react';
 import { Card } from './components/Card';
 import {Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
 import { BrowserRouter as Router, Route, Routes, useParams } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
 
 interface DashboardCardProps {
   title: string;
@@ -146,17 +145,22 @@ const SellerDashboard = () => {
       </div>
   );
 }
+
 const PaymentPage = () => {
   const { payment_url } = useParams();
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (payment_url) {
-      const formattedUrl = payment_url.replace(/\*\*/g, '/');
+      // Заменяем символы обратно на оригинальные
+      const formattedUrl = payment_url
+          .replace(/\*/g, ':')  // Заменяем '*' обратно на ':'
+          .replace(/\+/g, '/')  // Заменяем '+' обратно на '/'
+          .replace(/#/g, '?');  // Заменяем '#' обратно на '?'
 
-      navigate(formattedUrl);
+      // Перенаправляем на нужный URL
+      window.location.href = formattedUrl;
     }
-  }, [payment_url, navigate]);
+  }, [payment_url]);
 
   return <div>Redirecting...</div>;
 };
@@ -171,6 +175,5 @@ function App() {
       </Router>
   );
 }
-
 
 export default App;
