@@ -17,7 +17,9 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
                                                        value = 'N/A',
                                                        icon: Icon,
                                                        color = 'bg-gray-100 text-gray-600',
-                                                     }) => (
+                                                     }) => {
+  console.log('DashboardCard data:', { title, value, color });
+  return (
     <Card className="p-4 flex flex-col space-y-2">
       <div className="flex items-center space-x-2">
         <div className={`p-2 ${color} rounded-lg`}>
@@ -27,7 +29,8 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
       </div>
       <span className="text-2xl font-semibold">{value}</span>
     </Card>
-);
+  );
+};
 
 interface DashboardData {
   total: number;
@@ -49,6 +52,7 @@ const SellerDashboard = () => {
       try {
         const response = await fetch('https://api.mazalbot.com/api/v1/get-report?diamond_id=3');
         const result = await response.json();
+        console.log('Fetched data:', result);
         setDashboardData(result);
       } catch (error) {
         console.error('Error fetching dashboard data:', error);
@@ -57,6 +61,8 @@ const SellerDashboard = () => {
 
     fetchData();
   }, []);
+
+  console.log('SellerDashboard state:', dashboardData);
 
   return (
       <div className="w-full max-w-4xl bg-white rounded-lg p-6 space-y-6">
