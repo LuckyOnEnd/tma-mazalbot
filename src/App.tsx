@@ -2,8 +2,9 @@ import React, {useEffect, useState} from 'react';
 import { Package, DollarSign, Users, Clock } from 'lucide-react';
 import { Card } from './components/Card';
 import {Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import PaymentPage from "./PaymentPage.tsx";
+import AIPrompt from './components/AIPrompt';
 
 interface DashboardCardProps {
   title: string;
@@ -156,9 +157,20 @@ const SellerDashboard = () => {
 function App() {
   return (
       <Router>
+        <nav className="p-4 bg-gray-800 text-white">
+          <ul className="flex space-x-4">
+            <li>
+              <Link to="/">Dashboard</Link>
+            </li>
+            <li>
+              <Link to="/ai-chat">AI Chat</Link>
+            </li>
+          </ul>
+        </nav>
         <Routes>
           <Route path="/" element={<SellerDashboard />} />
           <Route path="/payment/:payment_url" element={<PaymentPage />} />
+          <Route path="/ai-chat" element={<AIPrompt />} />
         </Routes>
       </Router>
   );
